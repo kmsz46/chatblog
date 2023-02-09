@@ -8,8 +8,18 @@ CORS(app)
 app.secret_key = 'user'
 app.permanent_session_lifetime = timedelta(minutes=60) 
 
-USER_PATH = "user/ganbon.json"
+USER_PATH = "user/user.json"
 BLOG_PATH = "pages/access.json"
+
+@app.route("/login",methods=["GET","POST"])
+def login():
+    user = request.get_json()
+    user_data = json.load(open(USER_PATH, 'r'))
+    for u in user_data:
+        if u["password"] == user["password"]:
+            session.permanent = True 
+        session["user"] = user
+            
 
 @app.route("/user")
 def profile():
@@ -62,4 +72,5 @@ def contents():
         if blog["title"] == blog_title:
             return make_response(jsonify({"blog":blog}))
     
-    
+if __name__ == "__main__":
+    app.run(debug=True)
