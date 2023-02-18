@@ -26,7 +26,7 @@ def profile():
     user_data = json.load(open(USER_PATH, 'r'))
     blog_data = json.load(open(BLOG_PATH, 'r'))
     user_name = user_data["name"]
-    user_blog = [blog for blog in blog_data if blog["article_user"]==user_name]
+    user_blog = [title for title,blog in blog_data.items() if blog["article_user"]==user_name]
     return make_response(jsonify({"user_info":user_data,"blog_info":user_blog}))
 
 @app.route("/blogcreate",methods=["GET","POST"])
@@ -36,8 +36,8 @@ def create():
     file_path = f"pages/{len(blog_list)}.md"
     with open(file_path,"w",encoding="UTF-8") as f:
         f.write(blog_info["contents"])
-    blog_info["article"] = file_path
-    blog_list.append(blog_info)
+    blog_info["article_path"] = file_path
+    blog_list[blog_info["title"]] = blog_info
     with open(file_path, mode = "wt", encoding="utf-8") as f:
         json.dump(blog_list, f, ensure_ascii = False) 
 
@@ -66,11 +66,10 @@ def display():
 
 @app.route("/contents",methods=["GET","POST"])
 def contents():
-    blog_title = request.get_json()
+    blog_title = request.get_json()["title"]
     blog_list = json.load(open(BLOG_PATH, 'r'))
-    for blog in blog_list:
-        if blog["title"] == blog_title:
-            return make_response(jsonify({"blog":blog}))
+    target = blog_list[blog_title]
+    return make_response(jsonify({"blog":target}))
     
 if __name__ == "__main__":
     app.run(debug=True)
