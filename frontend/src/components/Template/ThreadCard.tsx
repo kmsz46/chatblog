@@ -4,11 +4,11 @@ import ThreadTemplate from './ThreadTemplate'
 
 type ThreadCardPropsType = {
     title:string;
-    Display:(e:any) => void;
 }
 type ThreadPropsType = {
-    title:"";
-    context:"";
+    title:string;
+    content:string;
+    article_user:string;
     tag:Array<string>;
     group:Array<string>;
 }
@@ -16,18 +16,21 @@ type ThreadPropsType = {
 const ThreadCard = (props:ThreadCardPropsType) => {
     const [results,setResults] = useState<ThreadPropsType>({
         title:"",
-        context:"",
+        content:"",
+        article_user:"",
         tag:[],
         group:[]
     })
     const ThreadFind = (e:any) => {
         e.preventDefault();
-        Axios.post("",{title:props.title})
+        Axios.post("http://127.0.0.1:5000/contents",{title:props.title})
         .then(res=>{
-            setResults(res.data)
+            setResults(res.data.blog)
         })
+        console.log(results)
         return(
-            <ThreadTemplate title={results.title} context={results.context} 
+            <ThreadTemplate title={results.title} content={results.content} 
+                            article_user = {results.article_user}
                             tag = {results.tag} group = {results.group}/>
         )
     }
