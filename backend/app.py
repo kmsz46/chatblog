@@ -14,17 +14,17 @@ BLOG_PATH = "pages/access.json"
 @app.route("/login",methods=["GET","POST"])
 def login():
     user = request.get_json()
-    user_data = json.load(open(USER_PATH, 'r'))
+    user_data = json.load(open(USER_PATH, 'r',encoding="UTF-8"))
     for u in user_data:
         if u["password"] == user["password"]:
             session.permanent = True 
         session["user"] = user
             
 
-@app.route("/user")
+@app.route("/user",methods=["GET","POST"])
 def profile():
-    user_data = json.load(open(USER_PATH, 'r'))
-    blog_data = json.load(open(BLOG_PATH, 'r'))
+    user_data = json.load(open(USER_PATH, 'r',encoding="UTF-8"))["ganbon"]
+    blog_data = json.load(open(BLOG_PATH, 'r',encoding="UTF-8"))
     user_name = user_data["name"]
     user_blog = [title for title,blog in blog_data.items() if blog["article_user"]==user_name]
     return make_response(jsonify({"user_info":user_data,"blog_info":user_blog}))
@@ -50,25 +50,27 @@ def delate():
             blog_list.remove(blog)
             break
 
-@app.route("/display")
+@app.route("/display",methods=["GET","POST"])
 def display():
-    user_data = json.load(open(USER_PATH, 'r'))
+    user_data = json.load(open(USER_PATH, 'r',encoding="UTF-8"))["ganbon"]
     session.permanent = True 
     session["user"] = user_data
-    blog_data = json.load(open(BLOG_PATH, 'r'))
+    blog_data = json.load(open(BLOG_PATH, 'r',encoding="UTF-8"))
     blog_title = []
-    for blog in blog_data:
+    for title,blog in blog_data.items():
         if blog["rule"] and set(blog["group"]) & set(user_data["group"])== set(blog["group"]):
-            blog_title.append(blog_data["title"])
+            blog_title.append(title)
         elif blog["rule"]==False and set(blog["group"]) & set(user_data["group"])!=set():
-            blog_title.append(blog_data["title"])
+            blog_title.append(title)
     return make_response(jsonify({"blog_title":blog_title}))
 
 @app.route("/contents",methods=["GET","POST"])
 def contents():
     blog_title = request.get_json()["title"]
-    blog_list = json.load(open(BLOG_PATH, 'r'))
+    blog_list = json.load(open(BLOG_PATH, 'r',encoding="UTF-8"))
     target = blog_list[blog_title]
+    target.pop("article_path")
+    target.pop("rule")
     return make_response(jsonify({"blog":target}))
     
 if __name__ == "__main__":
