@@ -1,0 +1,12 @@
+{
+    "テスト":
+    {
+        "title":"テスト",
+        "content":"# テスト\nこれはテストです",
+        "article_path":"./pages/test.md",
+        "article_user":"ganbon",
+        "tag":[],
+        "group":["B3"],
+        "rule":true
+    }
+}

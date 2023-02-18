@@ -1,8 +1,9 @@
-[
+{
+    "ganbon":
     {
-    "name":"ganbon",
-    "group":["B3","安藤研"],
-    "e-mail":"s20t301@kagawa-u.ac.jp",
-    "password":"password"
+        "name":"ganbon",
+        "group":["B3","安藤研"],
+        "e-mail":"s20t301@kagawa-u.ac.jp",
+        "password":"password"
     }
-]
+}
