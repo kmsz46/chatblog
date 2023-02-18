@@ -4,7 +4,6 @@ import ThreadTemplate from './ThreadTemplate'
 
 type ThreadCardPropsType = {
     title:string;
-    Display:(e:any) => void;
 }
 type ThreadPropsType = {
     title:"";
