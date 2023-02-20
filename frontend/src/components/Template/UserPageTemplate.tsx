@@ -2,28 +2,21 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from "react";
 import Axios from 'axios'
-import ThreadDisplay from './ThreadDisplay';
+import ThreadDisplay from '../Organisms/ThreadDisplay';
+import UserDataType from '@/types/UserData';
+import UserGet from '../Organisms/UserGet';
 
-type UserDataType = {
-    name:string;
-    group:string[];
-}
-const UserPageTemplate:NextPage = () =>{
-    const router = useRouter(); 
+
+const UserPageTemplate:NextPage = () => {
     const [userdata,setUser] = useState<UserDataType>({
         name:"",
         group:[]
     });
     const [threadtitle,setTheadTitle] = useState<string[]>([]);
-    const TitleGet = () => {
-      Axios.post("http://127.0.0.1:5000/user")
-      .then(res => {
-        setUser(res.data.user_info)
-        setTheadTitle(res.data.blog_info)
-    })
-    }
     useEffect(() => {
-      TitleGet();
+      const data = UserGet();
+      setUser(data.user)
+      setTheadTitle(data.title)
     },[])
     return (
         <>
