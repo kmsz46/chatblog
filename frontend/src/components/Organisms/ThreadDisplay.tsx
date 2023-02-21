@@ -9,9 +9,9 @@ type ResultPropsType = {
 const ThreadDisplay : React.FC<ResultPropsType> = React.memo(({threadlist}) => {
     return(
       <>
-      {threadlist.map((result) => { 
+      {threadlist.map((result,index) => { 
         return(
-            <ThreadCard title={result}/>
+            <ThreadCard id = {index} title={result}/>
         );
     })}
     </>

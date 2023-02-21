@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import {useState,useEffect} from 'react'
-import Axios from 'axios'
 import ReactMarkdown from 'react-markdown';
 
 

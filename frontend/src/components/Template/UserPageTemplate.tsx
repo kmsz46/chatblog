@@ -1,7 +1,5 @@
 import type { NextPage } from 'next'
-import { useRouter } from 'next/router';
 import React, { useState, useEffect } from "react";
-import Axios from 'axios'
 import ThreadDisplay from '../Organisms/ThreadDisplay';
 import UserDataType from '@/types/UserData';
 import UserGet from '../Organisms/UserGet';
@@ -14,9 +12,10 @@ const UserPageTemplate:NextPage = () => {
     });
     const [threadtitle,setTheadTitle] = useState<string[]>([]);
     useEffect(() => {
-      const data = UserGet();
-      setUser(data.user)
-      setTheadTitle(data.title)
+      UserGet().then(res => {
+        setUser(res.data.user_info)
+        setTheadTitle(res.data.blog_info)
+      });
     },[])
     return (
         <>
