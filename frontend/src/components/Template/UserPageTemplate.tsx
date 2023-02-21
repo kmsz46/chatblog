@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import React, { useState, useEffect } from "react";
 import ThreadDisplay from '../Organisms/ThreadDisplay';
 import UserDataType from '@/types/UserData';
-import UserGet from '../Organisms/UserGet';
+import UserGet from '../../api/UserGet';
 
 
 const UserPageTemplate:NextPage = () => {

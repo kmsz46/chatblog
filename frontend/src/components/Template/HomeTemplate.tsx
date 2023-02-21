@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/router';
 import ThreadDisplay from '../Organisms/ThreadDisplay';
 import React, { useState, useEffect } from "react";
-import TitleGet from '../Organisms/TitleGet';
+import TitleGet from '../../api/TitleGet';
 
 const HomeTemplate:NextPage = () => {
     const [threadtitle,setThreadTitle] = useState<string[]>([]);

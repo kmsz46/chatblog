@@ -1,16 +1,29 @@
-import { useRouter } from "next/router";
+import { useState,useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
+import ThreadPropsType from "@/types/ThreadProps";
+import ThreadFind from '@/api/ThreadFind';
+import ThreadCardPropsType from '@/types/ThreadCardProps';
 
-const Contents = () =>{
-    const router = useRouter();
-    console.log(router.query.title)
+const Contents = (props:ThreadCardPropsType) =>{
+    const [thread,setThread] = useState<ThreadPropsType>({
+        title:"",
+        content:"",
+        article_user:"",
+        tag:"",
+        group:""
+    })
+    useEffect(() => {
+        ThreadFind(props.title).then(res => {
+          setThread(res.data.blog)
+        });
+    },[])
     return (
         <>
-        <h1>{router.query.title}</h1>
-        <p>{router.query.article_user}</p>
-        <p>{router.query.tag}</p>
-        <p>{router.query.group}</p>
-        <ReactMarkdown>{router.query.content}</ReactMarkdown>
+        <h1>{thread.title}</h1>
+        <p>{thread.article_user}</p>
+        <p>{thread.tag}</p>
+        <p>{thread.group}</p>
+        <ReactMarkdown>{thread.content}</ReactMarkdown>
         </>
     )
 }

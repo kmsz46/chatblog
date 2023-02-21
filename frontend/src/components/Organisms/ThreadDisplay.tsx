@@ -11,7 +11,7 @@ const ThreadDisplay : React.FC<ResultPropsType> = React.memo(({threadlist}) => {
       <>
       {threadlist.map((result,index) => { 
         return(
-            <ThreadCard id = {index} title={result}/>
+            <ThreadCard title={result}/>
         );
     })}
     </>

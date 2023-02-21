@@ -1,32 +1,28 @@
 import React, { useState,useEffect } from 'react'
-import ThreadFind from '../Organisms/ThreadFind';
+import ThreadFind from '../../api/ThreadFind';
 import Link from 'next/link';
 import ThreadPropsType from '@/types/ThreadProps';
-
-type ThreadCardPropsType = {
-    id:number
-    title:string;
-}
+import ThreadCardPropsType from '@/types/ThreadCardProps';
 
 const ThreadCard = (props:ThreadCardPropsType) => {
     const [thread,setThread] = useState<ThreadPropsType>({
         title:"",
         content:"",
         article_user:"",
-        tag:[],
-        group:[]
+        tag:"",
+        group:""
     })
     useEffect(() => {
         ThreadFind(props.title).then(res => {
           setThread(res.data.blog)
         });
     },[])
-    console.log(thread)
+    // console.log(thread)
     return (    
     <>
     <Link 
-    as={`/blog/${props.id}`}
-    href={{pathname:`/blog/${props.id}`,query:thread}}>
+    as={`/blog/${props.title}`}
+    href={{pathname:`/blog/${props.title}`,query:thread.title}}>
         <div>{props.title}</div>
     </Link>
     </>

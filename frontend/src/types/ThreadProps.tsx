@@ -4,8 +4,8 @@ type ThreadPropsType = {
     title:string;
     content:string;
     article_user:string;
-    tag:Array<string>;
-    group:Array<string>;
+    tag:string;
+    group:string;
 }
 
 export default ThreadPropsType
