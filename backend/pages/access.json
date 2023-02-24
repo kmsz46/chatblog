@@ -1,11 +1,12 @@
 {
-    "テスト":
+    "c4A9WLQDbfsOTzz2FNUs8g":
     {
+        "id":"c4A9WLQDbfsOTzz2FNUs8g",
         "title":"テスト",
         "content":"# テスト\nこれはテストです",
         "article_path":"./pages/test.md",
         "article_user":"ganbon",
-        "tag":[],
+        "tag":["質問"],
         "group":["B3"],
         "rule":true
     }
