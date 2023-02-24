@@ -1,17 +1,18 @@
 import ThreadCard from "../Molecules/ThreadCard";
+import ThreadCardPropsType from "@/types/ThreadCardProps";
 import React from 'react'
 
 
 type ResultPropsType = {
-    threadlist:string[];
+    threadlist:ThreadCardPropsType[];
 }
 
 const ThreadDisplay : React.FC<ResultPropsType> = React.memo(({threadlist}) => {
     return(
       <>
-      {threadlist.map((result,index) => { 
+      {threadlist.map((result) => { 
         return(
-            <ThreadCard title={result}/>
+            <ThreadCard id={result.id} title={result.title}/>
         );
     })}
     </>

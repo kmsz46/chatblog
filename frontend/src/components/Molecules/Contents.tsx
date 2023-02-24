@@ -2,21 +2,23 @@ import { useState,useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import ThreadPropsType from "@/types/ThreadProps";
 import ThreadFind from '@/api/ThreadFind';
-import ThreadCardPropsType from '@/types/ThreadCardProps';
+import ThreadIDPropsType from '@/types/ThreadIDProps';
 
-const Contents = (props:ThreadCardPropsType) =>{
+const Contents = (props:ThreadIDPropsType) =>{
     const [thread,setThread] = useState<ThreadPropsType>({
+        id:"",
         title:"",
         content:"",
         article_user:"",
-        tag:"",
-        group:""
+        tag:[],
+        group:[]
     })
     useEffect(() => {
-        ThreadFind(props.title).then(res => {
+        ThreadFind(props).then(res => {
           setThread(res.data.blog)
         });
     },[])
+    console.log(thread)
     return (
         <>
         <h1>{thread.title}</h1>

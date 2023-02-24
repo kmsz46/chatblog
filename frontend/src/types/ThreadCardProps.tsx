@@ -1,4 +1,5 @@
 type ThreadCardPropsType = {
+    id:string;
     title:string;
 }
 
