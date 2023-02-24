@@ -2,7 +2,8 @@ import json
 from flask import Flask,request,make_response,jsonify,session
 from flask_cors import CORS
 from datetime import timedelta
- 
+import secrets
+
 app = Flask(__name__)
 CORS(app)
 app.secret_key = 'user'
@@ -37,6 +38,7 @@ def create():
     with open(file_path,"w",encoding="UTF-8") as f:
         f.write(blog_info["contents"])
     blog_info["article_path"] = file_path
+    blog_info["id"] = secrets.token_urlsafe(nbytes=16)
     blog_list[blog_info["title"]] = blog_info
     with open(file_path, mode = "wt", encoding="utf-8") as f:
         json.dump(blog_list, f, ensure_ascii = False) 
@@ -56,19 +58,20 @@ def display():
     session.permanent = True 
     session["user"] = user_data
     blog_data = json.load(open(BLOG_PATH, 'r',encoding="UTF-8"))
-    blog_title = []
-    for title,blog in blog_data.items():
+    blog_list = []
+    for id,blog in blog_data.items():
         if blog["rule"] and set(blog["group"]) & set(user_data["group"])== set(blog["group"]):
-            blog_title.append(title)
+            blog_list.append({"id":id,"title":blog["title"]})
         elif blog["rule"]==False and set(blog["group"]) & set(user_data["group"])!=set():
-            blog_title.append(title)
-    return make_response(jsonify({"blog_title":blog_title}))
+            blog_list.append({"id":id,"title":blog["title"]})
+    return make_response(jsonify({"blog_list":blog_list}))
 
 @app.route("/contents",methods=["GET","POST"])
 def contents():
-    blog_title = request.get_json()["title"]
+    blog_id = request.get_json()["id"]
+    print(blog_id)
     blog_list = json.load(open(BLOG_PATH, 'r',encoding="UTF-8"))
-    target = blog_list[blog_title]
+    target = blog_list[blog_id]
     target.pop("article_path")
     target.pop("rule")
     return make_response(jsonify({"blog":target}))
