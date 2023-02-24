@@ -4,23 +4,24 @@ import type {
     GetServerSidePropsResult,
     NextPage,
   } from 'next'
-import ThreadIDPropsType from "@/types/ThreadIDProps";
+import ThreadPropsType from "@/types/ThreadProps";
+import ThreadCardPropsType from "@/types/ThreadCardProps";
 
 export const getServerSideProps = async (
     context: GetServerSidePropsContext
-  ): Promise<GetServerSidePropsResult<ThreadIDPropsType>> => {
+  ): Promise<GetServerSidePropsResult<ThreadCardPropsType>> => {
     // context経由でブラウザから送信されたパラメーターを受け取る
-    const { id } = context.query
+    const { title } = context.query
     // 受け取ったパラメーターが意図した型でなければnotfoundページとして処理する
-    if (typeof id !== 'string') {
+    if (typeof title !== 'string') {
       return { notFound: true }
     }
     // 受け取ったパラメータに問題がなければStatusPagePropsを返す
-    return { props: { id } }
+    return { props: { title } }
   }
-const ThreadPage:NextPage<ThreadIDPropsType> = (props) => {
+const ThreadPage:NextPage<ThreadPropsType> = (props) => {
     return (
-        <Contents id={props.id} />
+        <Contents title={props.title} />
     )
 }
 export default ThreadPage
