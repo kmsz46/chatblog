@@ -8,7 +8,8 @@
 - typescript
 ## 初期起動時
 ```
-yarn create next-app --typescript
+git pull origin front-yoroshiku:front-ganbon
 cd frontend
+yarn install
 yarn dev
 ```
