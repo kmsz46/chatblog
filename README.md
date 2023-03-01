@@ -8,7 +8,7 @@
 - typescript
 ## 初期起動時
 ```
-git pull origin front-yoroshiku:front-ganbon
+git pull origin front-yoroshiku:front-[username]
 cd frontend
 yarn install
 yarn dev
