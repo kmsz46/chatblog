@@ -1,11 +1,14 @@
-import {ReactNode} from 'react';
+import { ReactNode } from 'react';
+import { SxProps, Theme } from '@mui/material/styles';
 
 type ButtonPropsType = {
-  text: string;
+  text?: string;
+  children?: ReactNode;
   color?: "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning";
   variant?: "text" | "outlined" | "contained";
   size?: "small" | "medium" | "large";
   startIcon?: ReactNode;
+  sx?: SxProps<Theme>;
   handleClick?: () => void;
 }
 export default ButtonPropsType;
