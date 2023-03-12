@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import { useRouter } from 'next/router';
 import ThreadDisplay from '../Organisms/ThreadDisplay';
 import React, { useState, useEffect } from "react";
 import TitleGet from '../../api/TitleGet';

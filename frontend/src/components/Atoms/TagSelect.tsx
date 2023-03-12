@@ -1,20 +1,18 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { useState  } from "react";
+import TagPropsType from '@/types/TagProps';
 
-type TagPropsType = {
-    setTag:React.Dispatch<React.SetStateAction<string>>;
-}
 
 const TagSelect = (props:TagPropsType) => {
   const option = ["質問","提案","お願い","お知らせ"]
-  const [tag, setTage] = React.useState('');
+  const [tag, setTag] = useState<string>('');
   const handleChange = (event: SelectChangeEvent) => {
     props.setTag(event.target.value as string);
-    setTage(event.target.value as string);
+    setTag(event.target.value as string);
   };
 
   return (

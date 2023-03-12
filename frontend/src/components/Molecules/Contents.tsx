@@ -18,7 +18,6 @@ const Contents = (props:ThreadIDPropsType) =>{
           setThread(res.data.blog)
         });
     },[])
-    console.log(thread)
     return (
         <>
         <h1>{thread.title}</h1>

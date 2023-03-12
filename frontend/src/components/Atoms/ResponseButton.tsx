@@ -2,7 +2,7 @@ import Button from '@mui/material/Button'
 
 const ResponseButton = () => {
   return (
-    <Button variant="outlined">返信</Button>
+    <Button variant="outlined">編集</Button>
   )
 }
 
