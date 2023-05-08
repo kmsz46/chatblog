@@ -7,6 +7,7 @@ import InputTags from '../Atoms/InputTags';
 import InputTag from '../Atoms/InputTag';
 import MarkdownEditor from '../Atoms/MarkdownEditor'
 import MultipleButton from '../Atoms/MultipleButton';
+import InputText from '../Atoms/InputText';
 
 // メインタグリスト
 const maintagList = [
@@ -36,11 +37,13 @@ const ThreadWriteTemplate:NextPage = () =>{
   const [selectTag, setSelectTag] = React.useState<string>('');
   const [selectSubTag, setSelectSubTag] = React.useState<string[]>([]);
   const [selectGroup, setSelectGroup] = React.useState<string[]>([]);
+  const [inputItemName, setInputItemName] = React.useState<string>('');
+  const [markdown, setMarkdown] = React.useState<string[]>([]);
 
   // 作成ボタンを押した際の処理 
   const handleFilter = () => {
     // 仮
-    console.log(selectTag, selectSubTag, selectGroup);
+    console.log(selectTag, selectSubTag, selectGroup, inputItemName);
   };
 
   return (
@@ -74,12 +77,15 @@ const ThreadWriteTemplate:NextPage = () =>{
       {/* 件名 */}
       <Box sx = {{ marginTop:4, marginLeft:10 }}>
         <Typography sx={{ mt: 2 }}>件名</Typography>
+          <InputText placeholder={"件名"} text={inputItemName} setText={setInputItemName} variant="outlined" sx={{ m: 1, width: 470 }}/>
       </Box>
 
       {/* 本文 */}
       <Box sx = {{ marginTop:4, marginLeft:10 }}>
         <Typography sx={{ mt: 2 }}>本文</Typography>
-        <MarkdownEditor />                         
+        <Box >
+          <MarkdownEditor />                         
+        </Box>
       </Box>
 
       {/* 作成ボタン */}
