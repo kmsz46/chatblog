@@ -6,15 +6,13 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useState  } from "react";
 import TagPropsType from '@/types/TagProps';
 
-
+// スレッド作成時のタグを選択する
 const TagSelect = (props:TagPropsType) => {
-  const option = ["質問","提案","お願い","お知らせ"]
-  const [tag, setTag] = useState<string>('');
+  const option = ["質問","提案","依頼","お知らせ"]
+  // 表示用のsetTagと親コンポーネントに渡すprops.setTagを用意している 
   const handleChange = (event: SelectChangeEvent) => {
     props.setTag(event.target.value as string);
-    setTag(event.target.value as string);
   };
-
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
@@ -22,7 +20,7 @@ const TagSelect = (props:TagPropsType) => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={tag}
+          value={props.tag}
           label="Tag"
           onChange={handleChange}
         >{

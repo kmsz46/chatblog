@@ -3,6 +3,9 @@ import ThreadFind from '../../api/ThreadFind';
 import Link from 'next/link';
 import ThreadCardPropsType from '@/types/ThreadCardProps';
 
+
+// スレッドのリンクコンポーネント
+//herfのqueryによってスレッドのidをURLに渡している
 const ThreadCard = (props:ThreadCardPropsType) => {
     return (    
     <>

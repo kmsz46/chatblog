@@ -4,6 +4,7 @@ import ThreadPropsType from "@/types/ThreadProps";
 import ThreadFind from '@/api/ThreadFind';
 import ThreadIDPropsType from '@/types/ThreadIDProps';
 
+//スレッドの内容を表示するコンポーネント
 const Contents = (props:ThreadIDPropsType) =>{
     const [thread,setThread] = useState<ThreadPropsType>({
         id:"",
@@ -13,6 +14,7 @@ const Contents = (props:ThreadIDPropsType) =>{
         tag:[],
         group:[]
     })
+    //API処理によるスレッド内容取得
     useEffect(() => {
         ThreadFind(props).then(res => {
           setThread(res.data.blog)
