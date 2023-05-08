@@ -2,11 +2,13 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import MultipleSelectBox from '../Atoms/MultipleSelectBox'
-import CloseButton from '../Atoms/CloseButton'
-import FilterButton from '../Atoms/FilterButton';
-import DisplaySettingButton from '../Atoms/DisplaySettingButton';
+import MultipleButton from '../Atoms/MultipleButton';
+import MultipleIconButton from '../Atoms/MultipleIconButton';
+import CloseIcon from "@mui/icons-material/Close";
+import InputTags from '../Atoms/InputTags';
+import InputTag from '../Atoms/InputTag';
 
+// modalのスタイル
 const styles = {
   position: 'absolute' as 'absolute',
   top: '50%',
@@ -19,11 +21,16 @@ const styles = {
   p: 4,
 };
 
+// 表示設定用モーダルコンポ―ネント
 const SettingsModal = () => {
-  const [selectTag, setSelectTag] = React.useState<string[]>([]);
+  const [selectTag, setSelectTag] = React.useState<string>('');
   const [selectGroup, setSelectGroup] = React.useState<string[]>([]);
   const [open, setOpen] = React.useState(false);
+ 
+  //  モーダルを開く
   const handleOpen = () => setOpen(true);
+  
+  // モーダルを閉じる
   const handleClose = (
     event: {}, 
     reason: "backdropClick" | "escapeKeyDown"
@@ -33,16 +40,21 @@ const SettingsModal = () => {
     }
   };
 
-  const tagList = [
-    'c',
-    'c++',
-    'java',
-    'python',
-    'go',
-    'vue',
-    'react',
+  // 決定ボタンを押した際の処理 
+  const handleFilter = () => {
+    // 仮
+    console.log(selectTag, selectGroup);
+    setOpen(false);
+  };
+
+  const maintagList = [
+    '質問',
+    '提案',
+    'お願い',
+    'お知らせ'
   ];
 
+  // 仮のグループリスト
   const groupList = [
     'B1',
     'B2',
@@ -57,7 +69,10 @@ const SettingsModal = () => {
 
   return (
     <div>
-      <DisplaySettingButton handleClick={handleOpen} />
+      {/* 表示設定用ボタン */}
+      <MultipleButton text="表示設定" variant="outlined" handleClick={handleOpen}/>
+      
+      {/* モーダル */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -66,20 +81,27 @@ const SettingsModal = () => {
       >
         <Box sx={styles}>
           <Box sx = {{ borderBottom:1, display:"flex", justifyContent:"space-around"}}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
+            {/* タイトル */}
+            <Typography variant="h6" component="h2">
               表示設定
             </Typography>
+
+            {/* 閉じるアイコンボタン */}
             <div style={{ flexGrow: 1 }}></div>
-            <Box sx = {{ marginBottom:1 }}>
-              <CloseButton handleClick={() => setOpen(false)}/> 
-            </Box>
+            <MultipleIconButton icon={<CloseIcon />} sx = {{ marginBottom:1 }} handleClick={() => setOpen(false)}/>
           </Box>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>タグ</Typography>
-          <MultipleSelectBox options={tagList} selected={selectTag} setSelected={setSelectTag} />                         
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>グループ</Typography>
-          <MultipleSelectBox options={groupList} selected={selectGroup} setSelected={setSelectGroup} />
+
+          {/* メインタグ */}
+          <Typography sx={{ mt: 2 }}>タグ</Typography>
+          <InputTag options={maintagList} tag={selectTag} setTag={setSelectTag} placeholder={"メインタグ選択"} sx={{ m: 1, width: 470 }}/>                         
+          
+          {/* 所属グループ */}
+          <Typography sx={{ mt: 2 }}>グループ</Typography>
+          <InputTags options={groupList} tags={selectGroup} setTags={setSelectGroup} placeholder={"グループ選択"} sx={{ m: 1, width: 470 }}/>  
+          
+          {/* 決定ボタン */}
           <Box sx = {{marginTop:2, display: "flex", justifyContent: "space-around" }}>
-            <FilterButton />
+            <MultipleButton text="決定" variant="contained" handleClick={handleFilter}/>
           </Box>
         </Box>
       </Modal>
