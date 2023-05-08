@@ -1,0 +1,30 @@
+version: "3"
+services:
+  web:
+    platform: linux/amd64
+    build: ./app
+    volumes:
+      - ./app:/app
+    ports:
+      - 5000:5000
+    links:
+      - db
+    tty: true
+
+  db:
+    platform: linux/amd64
+    build: ./db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: chatblog
+      MYSQL_USER: ganbon
+      MYSQL_PASSWORD: pass
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
+    volumes:
+      - ./db/data:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./db/sql:/docker-entrypoint-initdb.d
+      - ./db/log:/var/log/mysql
+    ports:
+      - 3306:3306
