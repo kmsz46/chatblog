@@ -9,6 +9,6 @@ type ButtonPropsType = {
   size?: "small" | "medium" | "large";
   startIcon?: ReactNode;
   sx?: SxProps<Theme>;
-  handleClick?: () => void;
+  handleClick: (e:any) => void;
 }
 export default ButtonPropsType;
