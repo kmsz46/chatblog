@@ -1,17 +1,17 @@
 import AppBar from '@mui/material/AppBar'
 import Toolbar from "@mui/material/Toolbar";
+import { Typography, colors } from '@mui/material';
 import Box from '@mui/material/Box';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MultipleButton from "../Atoms/MultipleButton";
 import MultipleIconButton from "../Atoms/MultipleIconButton";
-import { Typography } from '@mui/material';
-import Link from 'next/link';
+
 
 const Header = () => {
   return(
     <div style={{ width:"100%" }}>
-      <AppBar position="sticky" color = "success">
+      <AppBar position="sticky" style = {{backgroundColor: "green"}}>
         <Toolbar>
           <Typography
             variant='h5'
