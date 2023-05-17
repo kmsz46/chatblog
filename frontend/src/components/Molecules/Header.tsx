@@ -1,6 +1,6 @@
 import AppBar from '@mui/material/AppBar'
 import Toolbar from "@mui/material/Toolbar";
-import { Typography, colors } from '@mui/material';
+import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
